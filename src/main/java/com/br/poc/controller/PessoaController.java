@@ -1,6 +1,7 @@
 package com.br.poc.controller;
 
 
+import com.br.poc.controller.dto.NomePessoaEnderecoResponse;
 import com.br.poc.controller.dto.PessoaRequest;
 import com.br.poc.controller.dto.PessoaResponse;
 import com.br.poc.domain.Pessoa;
@@ -11,6 +12,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +42,16 @@ public class PessoaController {
     List<PessoaResponse> responses = buscaPessoaService.buscar(queryParamenter)
         .stream()
         .map(PessoaResponse::of)
+        .toList();
+
+    return ResponseEntity.ok(responses);
+  }
+
+  @GetMapping("/{nome}")
+  public ResponseEntity<List<NomePessoaEnderecoResponse>> findByName(@PathVariable String nome) {
+    List<NomePessoaEnderecoResponse> responses = buscaPessoaService.buscarPorNome(nome)
+        .stream()
+        .map(NomePessoaEnderecoResponse::of)
         .toList();
 
     return ResponseEntity.ok(responses);

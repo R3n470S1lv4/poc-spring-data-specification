@@ -10,7 +10,8 @@ public record PessoaResponse(
     String nome,
     String sobreNome,
     String email,
-    LocalDate dataNascimento
+    LocalDate dataNascimento,
+    EnderecoResponse endereco
 ) {
 
   public static PessoaResponse of(Pessoa pessoa) {
@@ -20,7 +21,8 @@ public record PessoaResponse(
         pessoa.getNome(),
         pessoa.getSobreNome(),
         pessoa.getEmail(),
-        pessoa.getDataNascimento()
+        pessoa.getDataNascimento(),
+        EnderecoResponse.of(pessoa.getEndereco())
     );
   }
 }

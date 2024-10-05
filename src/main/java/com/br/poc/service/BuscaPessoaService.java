@@ -2,6 +2,7 @@ package com.br.poc.service;
 
 import com.br.poc.domain.Pessoa;
 import com.br.poc.domain.PessoaSpecification;
+import com.br.poc.repository.NomePessoaEnderecoProjection;
 import com.br.poc.repository.PessoaRespository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -15,5 +16,9 @@ public class BuscaPessoaService {
 
   public List<Pessoa> buscar(PessoaSpecification specification) {
     return pessoaRespository.findAll(specification);
+  }
+
+  public List<NomePessoaEnderecoProjection> buscarPorNome(String nome) {
+    return pessoaRespository.findByNomeIgnoreCase(nome);
   }
 }

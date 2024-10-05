@@ -7,10 +7,11 @@ public record PessoaRequest(
     String nome,
     String sobreNome,
     String email,
-    LocalDate dataNascimento
+    LocalDate dataNascimento,
+    EnderecoRequest endereco
 ) {
 
   public Pessoa of() {
-    return new Pessoa(this.nome, this.sobreNome, this.email, this.dataNascimento);
+    return new Pessoa(this.nome, this.sobreNome, this.email, this.dataNascimento, endereco.of());
   }
 }

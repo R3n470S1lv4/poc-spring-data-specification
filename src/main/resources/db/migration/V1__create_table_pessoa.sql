@@ -6,5 +6,6 @@ CREATE TABLE pessoa (
 	sobre_nome varchar(255) NOT NULL,
 	email varchar(255) NOT NULL,
 	data_nascimento date NOT NULL,
+	endereco_id int NOT NULL,
 	CONSTRAINT pessoa_pkey PRIMARY KEY (pessoa_id)
 );

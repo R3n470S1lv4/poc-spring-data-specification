@@ -39,7 +39,7 @@ public class PessoaSpecification implements Specification<Pessoa> {
   }
 
   private Predicate porNome(Root<Pessoa> root, CriteriaBuilder criteriaBuilder) {
-    return criteriaBuilder.like(root.get("nome"), nome);
+    return criteriaBuilder.like(root.get("nomeCompleto"), nome);
   }
 
 }

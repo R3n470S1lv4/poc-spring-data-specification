@@ -1,9 +1,11 @@
 package com.br.poc.controller.dto;
 
 import com.br.poc.repository.NomePessoaEnderecoProjection;
+import java.time.LocalDate;
 
 public record NomePessoaEnderecoResponse(
-    String nome,
+    String nomeCompleto,
+    LocalDate dataNascimento,
     EnderecoResponse endereco
 ) {
 
@@ -11,6 +13,7 @@ public record NomePessoaEnderecoResponse(
       NomePessoaEnderecoProjection nomePessoaEnderecoProjection) {
     return new NomePessoaEnderecoResponse(
         nomePessoaEnderecoProjection.getNome(),
+        nomePessoaEnderecoProjection.getDataNascimento(),
         EnderecoResponse.of(nomePessoaEnderecoProjection.getEndereco())
     );
   }

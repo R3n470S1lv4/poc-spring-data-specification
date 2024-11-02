@@ -8,8 +8,10 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.lang.NonNull;
 
 @RequiredArgsConstructor
 public class PessoaSpecification implements Specification<Pessoa> {
@@ -18,8 +20,8 @@ public class PessoaSpecification implements Specification<Pessoa> {
   private final String sobreNome;
 
   @Override
-  public Predicate toPredicate(Root<Pessoa> root, CriteriaQuery<?> query,
-      CriteriaBuilder criteriaBuilder) {
+  public Predicate toPredicate(@NonNull Root<Pessoa> root, CriteriaQuery<?> query,
+      @NonNull CriteriaBuilder criteriaBuilder) {
 
     List<Predicate> predicates = new ArrayList<>();
 
@@ -35,11 +37,12 @@ public class PessoaSpecification implements Specification<Pessoa> {
 
   private Predicate porSobrenome(Root<Pessoa> root, CriteriaBuilder criteriaBuilder) {
     return criteriaBuilder
-        .equal(root.get("sobreNome"), sobreNome);
+        .equal(criteriaBuilder.lower(root.get("sobreNome")), sobreNome.toLowerCase());
   }
 
   private Predicate porNome(Root<Pessoa> root, CriteriaBuilder criteriaBuilder) {
-    return criteriaBuilder.like(root.get("nomeCompleto"), nome);
+    return criteriaBuilder.like(criteriaBuilder.lower(root.get("nome")),
+        "%".concat(nome.toLowerCase(Locale.ROOT)).concat("%"));
   }
 
 }

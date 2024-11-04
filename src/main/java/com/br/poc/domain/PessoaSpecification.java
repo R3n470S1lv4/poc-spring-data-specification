@@ -36,13 +36,16 @@ public class PessoaSpecification implements Specification<Pessoa> {
   }
 
   private Predicate porSobrenome(Root<Pessoa> root, CriteriaBuilder criteriaBuilder) {
-    return criteriaBuilder
-        .equal(criteriaBuilder.lower(root.get("sobreNome")), sobreNome.toLowerCase());
+    return criteriaBuilder.equal(
+        criteriaBuilder.lower(root.get("sobreNome")), sobreNome.toLowerCase()
+    );
   }
 
   private Predicate porNome(Root<Pessoa> root, CriteriaBuilder criteriaBuilder) {
-    return criteriaBuilder.like(criteriaBuilder.lower(root.get("nome")),
-        "%".concat(nome.toLowerCase(Locale.ROOT)).concat("%"));
+    return criteriaBuilder.like(
+        criteriaBuilder.lower(root.get("nome")),
+        "%".concat(nome.toLowerCase(Locale.ROOT)).concat("%")
+    );
   }
 
 }

@@ -8,11 +8,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import java.time.LocalDateTime;
 import lombok.Getter;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Getter
+@FieldNameConstants
 public class Endereco {
 
   @Id
